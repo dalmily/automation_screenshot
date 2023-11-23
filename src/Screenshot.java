@@ -56,6 +56,6 @@ public class Screenshot {
 		
 
 		Assert.assertEquals(actualNumber, expectedNumber);
-		// System.out.println(theTotalNumberOfStudents);
+		 System.out.println(theTotalNumberOfStudents);
 	}
 }
