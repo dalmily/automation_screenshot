@@ -25,14 +25,14 @@ public class Screenshot {
 
 		driver.get("http://127.0.0.1:5501/index.html");
 		driver.manage().window().maximize();
-		// Date currentDate = new Date();
+		Date currentDate = new Date();
 
-		// TakesScreenshot src = ((TakesScreenshot) driver);
+		 TakesScreenshot src = ((TakesScreenshot) driver);
 
-		// File SrcFile = src.getScreenshotAs((OutputType.FILE));
+		File SrcFile = src.getScreenshotAs((OutputType.FILE));
 
-		// File Dest = new File("./Screenshots/image" + currentDate + ".png");
-		// FileUtils.copyFile(SrcFile, Dest);
+		 File Dest = new File("./Screenshots/image" + currentDate + ".png");
+		 FileUtils.copyFile(SrcFile, Dest);
 
 		List<WebElement> theStudentsName = driver.findElements(By.tagName("option"));
 
