@@ -24,38 +24,49 @@ public class Screenshot {
 		WebDriver driver = new ChromeDriver();
 
 		driver.get("http://127.0.0.1:5501/index.html");
-		driver.manage().window().maximize();
-		Date currentDate = new Date();
+		// driver.manage().window().maximize();
+		// Date currentDate = new Date();
 
-		 TakesScreenshot src = ((TakesScreenshot) driver);
+		// TakesScreenshot src = ((TakesScreenshot) driver);
 
-		File SrcFile = src.getScreenshotAs((OutputType.FILE));
+		// File SrcFile = src.getScreenshotAs((OutputType.FILE));
 
-		 File Dest = new File("./Screenshots/image" + currentDate + ".png");
-		 FileUtils.copyFile(SrcFile, Dest);
+		// File Dest = new File("./Screenshots/image" + currentDate + ".png");
+		// FileUtils.copyFile(SrcFile, Dest);
 
 		List<WebElement> theStudentsName = driver.findElements(By.tagName("option"));
 
-		int theTotalNumberOfStudents = theStudentsName.size();
+		System.out.println(" ********* Names of the removed students ********");
+		for (int i = 0; i < theStudentsName.size(); i++) {
 
-		int howManyItems = 10;
+			if (i % 2 != 0) {
 
-		for (int i = 0; i < howManyItems; i++) {
+				theStudentsName.get(i).click();
+				System.out.println(theStudentsName.get(i).getText());
+				driver.findElement(By.xpath("//*[@id=\"remove\"]")).click();
 
-			driver.findElement(By.xpath("//*[@id=\"remove\"]")).click();
+			}
 
 		}
 
-		List<WebElement> numbersAfterRemove = driver.findElements(By.tagName("option"));
+		System.out.println(" ********* Names of the non-removed students ********");
 
-		int actualNumber = numbersAfterRemove.size();
-		System.out.println(actualNumber);
-		
-		int expectedNumber = theTotalNumberOfStudents - howManyItems;
+		List<WebElement> studentsNamesAfterRemove = driver.findElements(By.tagName("option"));
 
-		
+		for (int j = 0; j < studentsNamesAfterRemove.size(); j++) {
+
+			System.out.println(studentsNamesAfterRemove.get(j).getText());
+
+		}
+
+		int actualNumber =studentsNamesAfterRemove.size();
+		System.out.println(actualNumber + " actual number");
+
+		int expectedNumber = theStudentsName.size() - studentsNamesAfterRemove.size();
+
+		System.out.println(expectedNumber + " expected number");
 
 		Assert.assertEquals(actualNumber, expectedNumber);
-		// System.out.println(theTotalNumberOfStudents);
+		;
 	}
 }
